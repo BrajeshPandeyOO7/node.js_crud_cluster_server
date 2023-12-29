@@ -25,7 +25,7 @@ GloblApiRouting(app);
 mongoConnection().then((mongo_uri:string) => {
     console.log(`MongoDB connected to ${mongo_uri}`);
     app.listen(PORT, () => {
-        console.log(`Server running on ${PORT}`)
+      console.log(`Server running on ${PORT}`)
     })
 }).catch(err => {
     console.log(err.message);

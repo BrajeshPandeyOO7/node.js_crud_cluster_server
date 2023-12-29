@@ -1,15 +1,15 @@
 export class BadRequestException extends Error {
     statusCode;
-    constructor(message:string = "Bad Request", statusCode: number = 400) {
+    constructor(message:string = "Bad Request") {
         super(message);
-        this.statusCode = statusCode;
+        this.statusCode = 400;
     }
 }
 
 export class NotFoundException extends Error {
     statusCode;
-    constructor(message:string, statusCode: number) {
+    constructor(message:string) {
         super(message);
-        this.statusCode = statusCode;
+        this.statusCode = 404;
     }
 }

@@ -1,14 +1,32 @@
 import express, { NextFunction, Request, Response } from 'express';
 import { BadRequestException } from '../utility/custome-error';
 import { validateObjectId } from '../utility';
+import { createUser } from '../service/user-service';
+
 
 export default function userController(app:any) {
     const user_route = express.Router();
     app.use('/users', user_route);
     user_route.use((req:Request, res:Response, next:NextFunction) => {
+        next()
+        create(user_route)
         getUsers(user_route);
         getUserById(user_route);
-        next()
+    })
+}
+
+function create(route:any) {
+    route.post('/', async (req: Request, res:Response, next: NextFunction) => {
+        try {
+            const body = req.body;
+            if(
+                !Object.keys(!body).length
+            )throw new BadRequestException("body missing!");
+            const response = await createUser(body);
+            res.status(201).send(response);
+        } catch (error) {
+            next(error)
+        }
     })
 }
 

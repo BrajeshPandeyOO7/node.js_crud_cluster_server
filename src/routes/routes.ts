@@ -6,8 +6,8 @@ export default function GloblApiRouting(app:any) { // We are handling all route 
     const api_route = Router()
     app.use('/api',api_route);
     api_route.use((req:Request, res:Response, next:NextFunction) => {
-        next()
         userController(api_route);
+        next()
     })
     ErrorMiddlewareHandler(app)
 }
