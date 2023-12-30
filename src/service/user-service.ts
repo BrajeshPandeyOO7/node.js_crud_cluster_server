@@ -20,7 +20,17 @@ export async function getUserById(_id: string | mongoose.Types.ObjectId): Promis
 }
 
 export async function updateUserById(_id:string | mongoose.Types.ObjectId, body: Partial<IUser>): Promise<IUser> {
-    const update_record = await UserModel.findOneAndUpdate({_id}, {$set: body}, { new: true}).exec();
+    const { hobbies, ...rest } = body;
+    const update_record = await UserModel.findOneAndUpdate({_id}, {
+        $addToSet: {
+            hobbies: {
+                $each: hobbies ?? []
+            }
+        }, 
+        $set: rest
+    }, { 
+        new: true
+    }).exec();
     if(!update_record)throw new NotFoundException("record does not exist!");
     return update_record;
 }

@@ -22,7 +22,7 @@ function LoggerMiddleware(app:any) {
 
 function NotFoundEndpointMiddleware(app:any) {
     app.use((req:Request, res:Response, next:NextFunction) => {
-        throw new NotFoundException('This is not valid Endpoint') // Throw not found error for non existing endpoint.
+        throw new NotFoundException('Endpoint does not exist') // Throw not found error for non existing endpoint.
     })
 }
 
