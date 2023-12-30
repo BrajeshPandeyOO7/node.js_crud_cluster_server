@@ -16,6 +16,7 @@ app.use((req: any, res: any, next: any) => {
     "Origin, X-Requeted-With, Content-Type, Accept, Authorization, RBR, access-token")
   if (req.method === 'OPTIONS') {
     res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE") // Allow all method
+    return res.status(200).json({})
   }
   next()
 });
