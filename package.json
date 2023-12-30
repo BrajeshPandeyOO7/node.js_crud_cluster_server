@@ -7,7 +7,8 @@
     "node": ">=18.0.0"
   },
   "scripts": {
-    "start:dev": "nodemon src/server/app.ts"
+    "start:dev": "nodemon ./src/server/app.ts",
+    "start:prod": "node ./dist/server/app.js"
   },
   "author": "brajesh",
   "license": "ISC",
