@@ -9,6 +9,7 @@
   "scripts": {
     "start:dev": "nodemon ./src/server/app.ts",
     "start:prod": "node ./dist/server/app.js",
+    "start:multi": "ts-node ./src/server/distributed-app.ts",
     "test": "jest"
   },
   "author": "brajesh",

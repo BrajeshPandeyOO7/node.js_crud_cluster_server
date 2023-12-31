@@ -60,9 +60,6 @@ async function initiateDistributedServer() {
     const app = createExpressServer();
     MONGO_URI && await ConnectToMongoose(MONGO_URI);
     app.listen(PORT, () => console.log(`server listen on ${PORT}`));
-    if(Number(PORT) === 4002)setTimeout(() => {
-      process.kill(process.pid)
-    },7000)
   }
 }
 
