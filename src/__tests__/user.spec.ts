@@ -1,10 +1,11 @@
 import supertest from "supertest"
-import createExpressServer from "../server/server-config"
-import mongoConnection from "../db/conn"
+import { createExpressServer } from "../server/server-config";
+import ConnectToMongoose, { CreateMongoUri } from "../db/conn";
 
 describe('user-controller', () => {
     beforeAll(async () => {
-        await mongoConnection()
+        const mongo_uri = await CreateMongoUri();
+        await ConnectToMongoose(mongo_uri);
     })
 
     const request = supertest(createExpressServer())

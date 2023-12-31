@@ -1,11 +1,14 @@
 import { MongoMemoryServer } from 'mongodb-memory-server';
 import mongoose from 'mongoose';
 
-export default async function mongoConnection(): Promise<string> {
+export async function CreateMongoUri() {
     const mongod = await MongoMemoryServer.create();
-    const mongo_uri = mongod.getUri();
+    return mongod.getUri();
+}
+
+export default async function ConnectToMongoose(mongo_uri:string){
     await mongoose.connect(mongo_uri, {
         dbName: 'crud-api-db',
     });
-    return mongo_uri;
+    console.log(`MongoDB connected to ${mongo_uri}`);
 }

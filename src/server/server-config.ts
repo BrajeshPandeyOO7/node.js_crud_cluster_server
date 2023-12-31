@@ -1,8 +1,9 @@
 import GloblApiRouting from "../routes/routes";
 import bodyParser from "body-parser";
 import express from "express";
+import ConnectToMongoose, { CreateMongoUri } from "../db/conn";
 
-export default function createExpressServer() {
+export function createExpressServer() {
   const app = express();
 
   app.use(bodyParser.urlencoded({ extended: true }));
@@ -24,7 +25,17 @@ export default function createExpressServer() {
     }
     next();
   });
-
   GloblApiRouting(app);
   return app;
+}
+
+export default async function bootstrap(PORT: string | number) {
+  try {
+    const app = createExpressServer();
+    const mongo_uri = await CreateMongoUri();
+    await ConnectToMongoose(mongo_uri);
+    app.listen(PORT, () => console.log(`Server running on ${PORT}`));
+  } catch (error) {
+    console.log("Failed to start server!");
+  }
 }
